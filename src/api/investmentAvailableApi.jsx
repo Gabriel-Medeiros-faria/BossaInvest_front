@@ -15,7 +15,6 @@ export const investmentAvailableApi = async () => {
     if (!response || !response.data) {
         throw new Error("Unexpected response from server.");
     }
-    console.log("investment-available Response:", response);
     return response.data
   } catch (err) {
     console.error(

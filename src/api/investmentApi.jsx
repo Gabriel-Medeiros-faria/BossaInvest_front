@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const createInvestmentApi = async (walletId, investmentData) => {
-  console.log(investmentData);
+  console.log(walletId, investmentData);
   try {
     const config = {
       headers: {
@@ -16,7 +16,6 @@ export const createInvestmentApi = async (walletId, investmentData) => {
     if (!response || !response.data) {
       throw new Error("Unexpected response from server.");
     }
-    console.log("createInvestment Response:", response);
     return response.data;
   } catch (err) {
     console.error(
