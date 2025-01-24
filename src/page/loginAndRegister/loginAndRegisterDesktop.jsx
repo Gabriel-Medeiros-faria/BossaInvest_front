@@ -12,7 +12,6 @@ function LoginAndRegisterDesktop() {
   const [roles, setRoles] = useState([]);
   const [messageError, setMessageError] = useState("")
   const navigate = useNavigate();
-  console.log(messageError)
 
   useEffect(() => {
     if (!isLogin) {
