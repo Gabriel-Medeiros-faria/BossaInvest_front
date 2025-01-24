@@ -11,6 +11,7 @@ function LoginAndRegisterMobile() {
   const [inputs, setInputs] = useState({});
   const [roles, setRoles] = useState([]);
   const navigate = useNavigate();
+  const [messageError, setMessageError] = useState("")
 
   useEffect(() => {
     if (!isLogin) {
@@ -37,7 +38,7 @@ function LoginAndRegisterMobile() {
 
   async function login(e) {
     e.preventDefault();
-    await loginApi(inputs.email, inputs.password, navigate);
+    await loginApi(inputs.email, inputs.password, navigate, setMessageError);
   }
 
   async function signUp(e) {
@@ -70,6 +71,7 @@ function LoginAndRegisterMobile() {
                   type="text"
                   placeholder="Nome completo"
                   name="name"
+                  required
                   onChange={handleInputChange}
                 />
               </InputGroup>
@@ -81,6 +83,7 @@ function LoginAndRegisterMobile() {
                   name="roleId"
                   onChange={handleInputChange}
                   defaultValue=""
+                  required
                 >
                   <option value="" disabled>Selecione seu perfil</option>
                   {roles.map((role) => (
@@ -101,6 +104,7 @@ function LoginAndRegisterMobile() {
               type="email"
               placeholder="E-mail"
               name="email"
+              required
               onChange={handleInputChange}
             />
           </InputGroup>
@@ -113,6 +117,7 @@ function LoginAndRegisterMobile() {
               type="password"
               placeholder="Senha"
               name="password"
+              required
               onChange={handleInputChange}
             />
           </InputGroup>
@@ -128,6 +133,7 @@ function LoginAndRegisterMobile() {
             </span>
           </ToggleText>
         </Form>
+        {messageError ? <p style={{color: "white", marginTop: "10px"}}>{messageError}</p> : ""}
       </FormWrapper>
     </Container>
   );

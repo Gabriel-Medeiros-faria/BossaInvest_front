@@ -1,7 +1,7 @@
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
 
-export const loginApi = async (email, password, navigate) => {
+export const loginApi = async (email, password, navigate, setMessageError) => {
   try {
     const response = await axios.post("http://localhost:5100/auth/login", { email, password });
     if (!response || !response.data) {
@@ -20,6 +20,7 @@ export const loginApi = async (email, password, navigate) => {
     navigate("/");
     return response.data;
   } catch (err) {
+    setMessageError("Senha ou email incorreto")
     console.error("Login Error: ", err.response?.data || err.message);
     throw new Error(err.response?.data?.message || "Login failed.");
   }

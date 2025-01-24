@@ -10,7 +10,9 @@ function LoginAndRegisterDesktop() {
   const [isLogin, setIsLogin] = useState(true);
   const [inputs, setInputs] = useState({});
   const [roles, setRoles] = useState([]);
+  const [messageError, setMessageError] = useState("")
   const navigate = useNavigate();
+  console.log(messageError)
 
   useEffect(() => {
     if (!isLogin) {
@@ -37,7 +39,7 @@ function LoginAndRegisterDesktop() {
 
   async function login(e) {
     e.preventDefault();
-    await loginApi(inputs.email, inputs.password, navigate);
+    await loginApi(inputs.email, inputs.password, navigate, setMessageError);
   }
 
   async function signUp(e) {
@@ -86,6 +88,7 @@ function LoginAndRegisterDesktop() {
                   type="text"
                   placeholder="Nome completo"
                   name="name"
+                  required
                   onChange={handleInputChange}
                 />
               </InputGroup>
@@ -97,6 +100,7 @@ function LoginAndRegisterDesktop() {
                   name="roleId"
                   onChange={handleInputChange}
                   defaultValue=""
+                  required
                 >
                   <option value="" disabled>Selecione seu perfil</option>
                   {roles.map((role) => (
@@ -117,6 +121,7 @@ function LoginAndRegisterDesktop() {
               type="email"
               placeholder="E-mail"
               name="email"
+              required
               onChange={handleInputChange}
             />
           </InputGroup>
@@ -128,10 +133,12 @@ function LoginAndRegisterDesktop() {
             <Input
               type="password"
               placeholder="Senha"
+              required
               name="password"
               onChange={handleInputChange}
             />
           </InputGroup>
+          
 
           <Button type="submit">
             {isLogin ? "Entrar" : "Criar conta"}
@@ -144,6 +151,7 @@ function LoginAndRegisterDesktop() {
             </span>
           </ToggleText>
         </Form>
+        {messageError ? <p style={{color: "white", marginTop: "10px"}}>{messageError}</p> : ""}
       </RightPanel>
     </Container>
   );
