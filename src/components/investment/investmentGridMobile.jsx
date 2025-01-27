@@ -13,7 +13,6 @@ import {
 import InvestmentCard from "./investmentCard";
 import { investmentAvailableApi } from "../../api/investmentAvailableApi";
 
-// Mapeamento dos ícones por setor (opcional, para estilização extra)
 const iconMapping = {
   "Tecnologia": Building2,
   "Imobiliário": HomeIcon,
@@ -28,7 +27,6 @@ const iconMapping = {
 export default function InvestmentGridMobile() {
   const [investmentOptions, setInvestmentOptions] = useState([]);
 
-  // Função para buscar os dados da API
   useEffect(() => {
     async function fetchInvestmentOptions() {
       try {
@@ -52,18 +50,18 @@ export default function InvestmentGridMobile() {
 
         <InvestmentGridStyled>
           {investmentOptions.map((option) => {
-            // Mapeamento do ícone baseado no setor
+
             const IconComponent = iconMapping[option.sector] || Building2;
 
             return (
               <InvestmentCard
                 key={option.id}
                 option={{
-                  title: option.companyName, // O nome da empresa vira o título
-                  description: option.description, // A descrição do investimento
-                  examples: [option.sector], // O setor será mostrado como exemplo
-                  icon: IconComponent, // Ícone correspondente ao setor
-                  minimumInvestment: option.minimumInvestment, // Valor mínimo de investimento
+                  title: option.companyName, 
+                  description: option.description, 
+                  examples: [option.sector], 
+                  icon: IconComponent, 
+                  minimumInvestment: option.minimumInvestment, 
                 }}
               />
             );

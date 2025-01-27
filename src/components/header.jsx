@@ -7,7 +7,7 @@ import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton } from "
 
 function Header({ setIsLoggedIn }) {
   const navigate = useNavigate();
-  const user = useUser(); // Pegando os dados do usuário
+  const user = useUser(); 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   function logout() {
@@ -16,7 +16,7 @@ function Header({ setIsLoggedIn }) {
     navigate("/signIn");
   }
 
-  // Alterna a abertura/fechamento do Drawer
+
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -24,7 +24,6 @@ function Header({ setIsLoggedIn }) {
     setIsDrawerOpen(open);
   };
 
-  // Lista de itens do Drawer (mobile)
   const drawerList = (
     <DrawerListContainer
       role="presentation"
@@ -86,7 +85,6 @@ function Header({ setIsLoggedIn }) {
 
 export default Header;
 
-// Styled Components
 const HeaderContainer = styled.header`
   width: 100vw;
   background: #1a2c38;

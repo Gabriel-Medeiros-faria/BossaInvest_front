@@ -11,14 +11,13 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("accessToken"));
   const isUserAuthenticated = () => {
-    // Verificar se há um usuário de autenticação armazenado localmente
+
     const logged = localStorage.getItem("accessToken")
 
-    // Retornar verdadeiro se houver um usuário de autenticação válido
     return !!logged
   };
   
-  // Componente de redirecionamento para a página de login caso o usuário não esteja logado 
+
   const PrivateRoute = ({ element }) => {
     return isUserAuthenticated() ? (
       element

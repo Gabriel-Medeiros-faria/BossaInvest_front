@@ -1,7 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-// import backgroundImage from "../assets/background 2.jpg";
 
-//Estilos globais da aplicação
 const GlobalStyle = createGlobalStyle`
 *{
     box-sizing: border-box;
@@ -36,7 +34,6 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1;
         font-family: "Montserrat", sans-serif;
         font-variation-settings:"slnt" 0;
-         //background-color: rgba(0, 0, 0, 0.9);
         background-size: cover; 
         position: relative;
         z-index: -2;

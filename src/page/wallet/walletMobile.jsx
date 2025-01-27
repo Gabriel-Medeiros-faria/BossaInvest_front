@@ -5,7 +5,6 @@ import { investmentAvailableApi } from "../../api/investmentAvailableApi";
 import { deleteInvestmentApi } from "../../api/investmentApi";
 import useUser from "../../utils/useUser";
 
-// Importando componentes do Material UI
 import {
   Card,
   CardContent,
@@ -33,7 +32,6 @@ function WalletMobile() {
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [investmentOptions, setInvestmentOptions] = useState([]);
 
-  // Carregar carteiras e investimentos disponíveis
   useEffect(() => {
     async function fetchData() {
       try {
@@ -52,14 +50,13 @@ function WalletMobile() {
     fetchData();
   }, []);
 
-  // Função para criar uma nova carteira
   const handleCreatePortfolio = async () => {
     if (newPortfolioName.trim()) {
       const newPortfolio = { name: newPortfolioName, userId: useUser().sub };
 
       try {
         const createdPortfolio = await createWalletApi(newPortfolio);
-        setPortfolios([...portfolios, createdPortfolio]); // Atualiza a lista de carteiras
+        setPortfolios([...portfolios, createdPortfolio]); 
         setNewPortfolioName("");
         setIsCreateDialogOpen(false);
       } catch (error) {
@@ -68,13 +65,11 @@ function WalletMobile() {
     }
   };
 
-  // Função para abrir o diálogo de adicionar investimento
   const handleAddInvestment = (portfolio) => {
     setSelectedPortfolio(portfolio);
     setIsInvestmentDialogOpen(true);
   };
 
-  // Função para adicionar o investimento na carteira selecionada
   const handleSelectInvestment = async (investment) => {
 
     const investmentAmount = investment.amount || investment.minimumInvestment;
@@ -87,24 +82,21 @@ function WalletMobile() {
       };
 
       try {
-        // Adiciona o investimento na carteira
         const updatedPortfolio = await createInvestmentApi(
           selectedPortfolio.id,
           investmentData
         );
 
-        // Atualiza a lista de carteiras no estado para refletir a carteira com o novo investimento
         setPortfolios((prevPortfolios) =>
           prevPortfolios.map((p) =>
             p.id === updatedPortfolio.id
-              ? { ...p, investments: updatedPortfolio.investments } // Atualiza a lista de investimentos na carteira
+              ? { ...p, investments: updatedPortfolio.investments } 
               : p
           )
         );
 
-        // Recarrega a lista de investimentos da carteira, se necessário
-        const updatedPortfolios = await getWalletApi(); // Recarregar as carteiras
-        setPortfolios(updatedPortfolios); // Atualiza o estado com a lista recarregada
+        const updatedPortfolios = await getWalletApi(); 
+        setPortfolios(updatedPortfolios);
       } catch (error) {
         console.error("Erro ao adicionar investimento:", error);
       }
@@ -117,12 +109,11 @@ function WalletMobile() {
     setIsInvestmentDialogOpen(false);
   };
 
-  // Função para deletar um investimento
+
   const handleDeleteInvestment = async (investmentId) => {
     try {
       await deleteInvestmentApi(investmentId);
 
-      // Atualiza a lista de investimentos na carteira após deletar
       setPortfolios((prevPortfolios) =>
         prevPortfolios.map((portfolio) => ({
           ...portfolio,
@@ -141,7 +132,7 @@ function WalletMobile() {
       await deleteWalletApi(id);
       setPortfolios((prevPortfolios) =>
         prevPortfolios.filter((p) => p.id !== id)
-      ); // Remove a carteira do estado
+      ); 
     } catch (error) {
       console.error("Erro ao excluir carteira:", error);
     }
@@ -156,7 +147,6 @@ function WalletMobile() {
         Minhas Carteiras
       </Typography>
 
-      {/* Lista de Carteiras */}
       {portfolios.map((portfolio) => (
         <Card
           key={portfolio.id}
